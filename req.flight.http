@@ -1,0 +1,128 @@
+Admin
+________________
+
+POST	/app/v1/flight/admin/login	
+Get login	
+{
+  "username": "mike",
+  "password": "mike"
+}		
+
+{
+"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+}	200
+
+###
+
+POST	/app/v1/airline	
+Add new airline	
+{
+    "name": "Indigo"
+}	
+Authorization: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c	
+{
+"name": "Indigo",
+"blocked": "no",
+"id": 201
+}	//200
+###
+POST	/app/v1/airline/flight	
+Create flight	
+{
+    "flight_number" : "dp234",
+    "airline_id" : 21,
+    "from_place" : "delhi",
+    "to_place" : "pune",
+    "start_time" : "10:35",
+    "end_time" : "13:45",
+    "total_number_of_business_class_seats" : "50",
+    "total_number_of_nonbusiness_class_seats" : "50",
+    "ticket_cost" : "5000",
+    "total_number_of_seats" : "100",
+    "meal" : "veg"
+}	
+Authorization: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c		
+//201
+
+###
+GET	/app/v1/flight/search	
+Search flights	
+{
+    "date": "23/02/2023",
+    "from_place": "delhi",
+    "to_place: "pune",
+    "round_trip: "yes"
+}		
+[{
+    "fligh_id": 245,
+    "flight_number" : "dp234",
+    "airline" : "garuda",
+    "from_place" : "delhi",
+    "to_place" : "pune",
+    "start_date_time" : "01/01/2019 10:35",
+    "end_date_time" : "31/12/2025 13:45",
+    "total_number_of_business_class_seats" : "50",
+    "total_number_of_nonbusiness_class_seats" : "50",
+    "ticket_cost" : "5000",
+    "total_number_of_seats" : "100",
+    "meal" : "veg"
+}]	//200
+###
+POST /app/v1/flight/booking/{flightid}	
+Book flight	
+{
+    "flight_id": 215,
+    "booked_by": "mahesh",
+    "email": "mahesh@gmail.com",
+    "number_of_seats": 2,
+    "passengers": [{"name": "ramesh", "age": 24, "gender": "male"},{"name": "suresh", "age": 22, "gender": "male"}],
+    "selected_meal": "veg",
+    "selected_seat_number: null
+}	
+
+{
+    "pnr": "abc521"
+}	//200
+###
+
+GET	/app/v1/flight/ticket/{pnr}	
+Get ticket details using pnr	-		{
+    "id": 23,
+    "pnr": "abc521",
+    "booked_by": "mahesh",
+    "email": "mahesh@gmail.com",
+    "number_of_seats": 2,
+    "passengers": [{"name": "ramesh", "age": 24, "gender": "male"},{"name": "suresh", "age": 22, "gender": "male"}]
+    "selected_meal": "veg",
+    "selected_seat_number: null,
+    "status": "active"
+}	//200
+
+###
+GET 	/app/v1/flight/booking/history/{emailId}	
+Get all tickets booked by user (email)	-		
+[{
+    "id": 23,
+    "pnr": "abc521",
+    "booked_by": "mahesh",
+    "email": "mahesh@gmail.com",
+    "number_of_seats": 2,
+    "passengers": [{"name": "ramesh", "age": 24, "gender": "male"},{"name": "suresh", "age": 22, "gender": "male"}]
+    "selected_meal": "veg",
+    "selected_seat_number: null
+    "status": "active"
+}]	//200
+###
+
+PUT	/app/v1/flight/booking/cancel/{pnr}	
+Cancel ticket by pnr	-		-	
+//204
+###
+
+
+
+
+
+
+
+
